@@ -16,11 +16,11 @@ public class MaximumWater {
             heights[i]=sc.nextInt();            
         }
 
-        // float y_dash[]=new float[n];
+        double y_dash[]=new double[n];
 
-        // for (int i = 0; i < y_dash.length; i++) {
-        //     y_dash[i]=(float)=
-        // }
+        for (int i = 0; i < y_dash.length; i++) {
+            y_dash[i]=(double)heights[i]/Math.sin(Math.toRadians(60));
+        }
 
         int i=0, j=n-1, maxi=0, maxj=n-1;
         int maxWater=0;
