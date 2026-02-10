@@ -4,10 +4,67 @@
 // or @ or .) vi)Find the largest palindrome in a given input sentence after removing any non-
 // alphanumeric character. 
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class StringPattern {
+
+    static List<String> getStringTokens(String str) {
+        String s="";
+        List<String> tokens=new ArrayList<>();
+
+        for (int i=0; i<str.length(); i++) {
+            if (str.charAt(i)==' ' || str.charAt(i)=='@' || str.charAt(i)=='.') {
+                tokens.add(s);
+                s="";
+            } else {
+                s+=str.charAt(i);
+            }
+        }
+        tokens.add(s);
+        return tokens;
+    }
+
+    static boolean isPalindrome(String str) {
+        int i=0, j=str.length()-1;
+
+        while (i<j) {
+            if (str.charAt(i)!=str.charAt(j))
+                return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+
+    static String largestPalindrome(String str) {
+        String newStr="";
+
+        for (int i=0; i<str.length(); i++) {
+            if (Character.isLetterOrDigit(str.charAt(i)) || Character.isWhitespace(str.charAt(i))) {
+                newStr+=str.charAt(i);
+            } else {
+                newStr+=' ';
+            }
+        }
+
+        List<String> tokens=getStringTokens(newStr);
+        int max=0;
+        String largestPalindrome="";
+
+        for (int i=0; i<tokens.size(); i++) {
+            String cmp=tokens.get(i);
+            if (isPalindrome(cmp) && cmp.length()>max) {
+                max=cmp.length();
+                largestPalindrome=cmp;
+            }
+        }
+
+        return (max==0)?"No palindrome Strings":largestPalindrome;
+    }
+
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         String str=sc.nextLine();
@@ -39,8 +96,18 @@ public class StringPattern {
         System.out.println("Character array: " + Arrays.toString(charArray));
 
         // display tokens in the string
-        String[] tokens = str.split("[ @.]+");
-        System.out.println("Tokens: " + Arrays.toString(tokens));
+        System.out.print("Tokens: ");
+        List<String> tokens=getStringTokens(str);
+        System.out.print(tokens.toString());
+
+        System.out.println();
+
+        // find the larget palindrome
+        String largestPalindrome=largestPalindrome(str);
+        System.out.print("Largest Palindrome: ");
+        System.out.print(largestPalindrome);
+
+        System.out.println();
 
         sc.close();
     }    
