@@ -2,8 +2,9 @@
 // minerals  available,  etc.  However,  the  method  of  exploring  is  different  on  each  planet,  due  to  the 
 // difference in atmosphere and surface composition. Every explorer should have an explore method 
 // that is defined based on the type of the explorer and the planet where (s)he is exploring. Consider 
-// three planets-Mars, Venus, and Saturn. 
-// Implement it using interfaces, abstract class, inheritance. 
+// three planets-Mars, Venus, and Saturn. Implement it using interfaces, abstract class, inheritance. 
+// Sajjad Ahmed Shaaz, 002410501093
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,7 +73,7 @@ public class Explorer {
         planets.add(new Venus());
         planets.add(new Saturn());
         
-        MineralExplorer lfe=new MineralExplorer();
+        LifeformExplorer lfe=new LifeformExplorer();
         for (Planet planet : planets) {
             planet.explore(lfe);
         }
