@@ -1,4 +1,8 @@
+# .  Write  first seven Fibinacci numbers using generator next function/ yield in python. Trace 
+# and memorize the function. Also check whether a user given number is Fibinacci or not. 
+# Sajjad Ahmed Shaaz, 002410501093
 
+# returns fibonacci
 def fibonacci(n):
     a=0
     b=1

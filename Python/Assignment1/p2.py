@@ -1,3 +1,6 @@
+# 2.  Write  a  discount  coupon  code  using  dictionary in Python with different rate coupons for 
+# each day of the week. 
+# Sajjad Ahmed Shaaz, 002410501093
 
 DISCOUNT_COUPONS = {
     "Monday": {"code": "MDY10", "rate": 10},

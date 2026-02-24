@@ -1,3 +1,5 @@
+# Sajjad Ahmed Shaaz, 002410501093
+
 import itertools
 
 data = range(21)
