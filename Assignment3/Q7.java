@@ -6,14 +6,13 @@
 // If n=10 then the output will be [1,2,3,4,fizz,6,buzz,8,9,fizz]. You may use lambda function for 
 // only creating Runnable objects
 // Sajjad Ahmed Shaaz, 002410501093
+import java.util.*;
 
 class FizzBuzzModified {
     private int n;
     private int i = 1;
 
-    public FizzBuzzModified(int n) {
-        this.n = n;
-    }
+    public FizzBuzzModified(int n) { this.n = n; }
 
     public synchronized void fizz() throws InterruptedException {
         while (i <= n) {
@@ -23,6 +22,7 @@ class FizzBuzzModified {
                 notifyAll();
             } else wait();
         }
+        notifyAll(); // fix: prevent deadlock
     }
 
     public synchronized void buzz() throws InterruptedException {
@@ -33,6 +33,7 @@ class FizzBuzzModified {
                 notifyAll();
             } else wait();
         }
+        notifyAll();
     }
 
     public synchronized void fizzbuzz() throws InterruptedException {
@@ -43,6 +44,7 @@ class FizzBuzzModified {
                 notifyAll();
             } else wait();
         }
+        notifyAll();
     }
 
     public synchronized void number() throws InterruptedException {
@@ -53,21 +55,23 @@ class FizzBuzzModified {
                 notifyAll();
             } else wait();
         }
+        notifyAll();
     }
 }
 
 public class Q7 {
     public static void main(String[] args) throws InterruptedException {
-        int n = 20;
-        FizzBuzzModified fb = new FizzBuzzModified(n);
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter n: ");
+        int n = sc.nextInt();
 
-        Thread A = new Thread(() -> { try { fb.fizz(); } catch (Exception e) {} });
-        Thread B = new Thread(() -> { try { fb.buzz(); } catch (Exception e) {} });
-        Thread C = new Thread(() -> { try { fb.fizzbuzz(); } catch (Exception e) {} });
-        Thread D = new Thread(() -> { try { fb.number(); } catch (Exception e) {} });
+        FizzBuzzModified fb = new FizzBuzzModified(n);
+        Thread A = new Thread(() -> { try { fb.fizz();     } catch (Exception e) { e.printStackTrace(); } });
+        Thread B = new Thread(() -> { try { fb.buzz();     } catch (Exception e) { e.printStackTrace(); } });
+        Thread C = new Thread(() -> { try { fb.fizzbuzz(); } catch (Exception e) { e.printStackTrace(); } });
+        Thread D = new Thread(() -> { try { fb.number();   } catch (Exception e) { e.printStackTrace(); } });
 
         A.start(); B.start(); C.start(); D.start();
-
         A.join(); B.join(); C.join(); D.join();
     }
 }
